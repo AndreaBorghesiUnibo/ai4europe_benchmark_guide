@@ -11,6 +11,8 @@ hardware environments.
 
 ## Motivation of benchmarking
 
+- ***Fair comparisons***: Comparing AI assets and results across research papers
+  and techniques
 - ***Insight and Improvement***: Benchmarking activities provide valuable insights,
   driving improvements and informed decision-making to enhance AI system
 performance and competitiveness.
@@ -27,6 +29,9 @@ offering a comprehensive understanding of their behavior.
 - ***Complexity***: The effort is complicated by AI assets' variability in
   behavior based on numerous hyperparameters and performance differences on
 heterogeneous hardware devices.
+- ***AutoML***: Using AI itself to build and train ML models; the datasets
+  obtained through benchmarking can be used used to guide the creation of new
+models
 
 ## Challenges
 
@@ -39,6 +44,8 @@ applications in computer vision and speech recognition.
 - ***Training with Open-Source Data***: AI model training, especially for tasks
   like computer vision and speech recognition, relies on machine learning
 algorithms and extensive open-source datasets created by researchers.
+- ***Standardisation Issues***: lack of standardised and easy benchmarking does
+  not allow understanding when AI algorithms actually work.
 
 
 

@@ -15,9 +15,12 @@ Contents
 ==================
 .. toctree::
     Home <self>
-    benchmarking_process.md
     motivation.md
-    automation_anabled_by_benchmarking.md
+    benchmarking_process.md
+    metrics.md
+    output.md
+    automation_enabled_by_benchmarking.md
+    considerations.md
     reproducibility_checklist.md
 
 * :ref:`genindex`
