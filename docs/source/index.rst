@@ -19,9 +19,11 @@ Contents
     benchmarking_process.md
     metrics.md
     output.md
+    api_example.md
     automation_enabled_by_benchmarking.md
     considerations.md
     reproducibility_checklist.md
+    bonsapps.md
 
 * :ref:`genindex`
 * :ref:`modindex`
