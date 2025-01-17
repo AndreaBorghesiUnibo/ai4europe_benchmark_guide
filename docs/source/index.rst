@@ -22,7 +22,7 @@ Contents
     api_example.md
     automation_enabled_by_benchmarking.md
     considerations.md
-    reproducibility_checklist.md
+    reproducibility.md
     bonsapps.md
 
 * :ref:`genindex`

@@ -1,13 +1,11 @@
 # Benchmark Output
 
-- Output Format:
-    - The benchmark workflow output can vary in form.
-    - The simplest format is a data frame organized in a structured manner,
-      particularly in a _tabular_ format.
+The benchmark workflow output can vary in form.  The simplest format is a data
+frame organized in a structured manner, particularly in a _tabular_ format.
 
 The recommended solution is to have ***multiple data sets for each AI asset, and
 one set for each HW resource***.
-- The output of the benchmarking process then is a data set identified as
+The output of the benchmarking process then is a data set identified as
   ```<asset_name>_<HW>``` where ```<asset_name>``` indicates the AI asset and
 ```<HW>``` indicates the HW device.
 
@@ -29,35 +27,35 @@ HW resource, assuming that:
 |Instance#I |val4 |val5 | ... |val6 |   <?>   |   <?>   | ... |   <?>   |
 |    ...    | ... | ... | ... | ... |   ...   |   ...   | ... |   ...   |
 
-- Each row corresponds to the execution of the AI asset on a specific HW
+Each row corresponds to the execution of the AI asset on a specific HW
   resource, with a particular combination of hyperparameter values (from
 ```HP#1``` to ```HP#N```) and fed with a particular input instance; the
 remaining columns (from ```Metric#1``` to ```Metric#M```) indicate the
 measurements obtained for the specific run.
-- The column relative to the input instance might be excluded if the metrics of
-  interest are not impacted by the input fed to the AI asset
-- To obtain a machine-readable representation, if there are no particular
-  requirements, a very basic data format such as Comma-Separated Values (CSV)
-file can be used
+
+The column relative to the input instance might be excluded if the metrics of
+interest are not impacted by the input fed to the AI asset.  To obtain a
+machine-readable representation, if there are no particular requirements, a very
+basic data format such as Comma-Separated Values (CSV) file can be used.
 
 ## Metadata Companion 
 
 To ensure reusable and understandable benchmark results, the output of the
 benchmark process should be accompanied by a ***metadata companion***.
 
-- Metadata Requirement:
-    - Include all necessary corollary information for benchmarks to be reusable
-      and understandable post-generation.
-    - Details to provide:
-        - Specifications of the executed AI asset.
-        - Hardware device used for the experiment.
-        - Hyperparameter values affecting behavior.
-        - Measured metrics.
+Metadata Requirement:
+- Include all necessary corollary information for benchmarks to be reusable
+  and understandable post-generation.
+- Details to provide:
+    - Specifications of the executed AI asset.
+    - Hardware device used for the experiment.
+    - Hyperparameter values affecting behavior.
+    - Measured metrics.
 
-- Implementation:
-    - Provide metadata describing the benchmark and the structure of the
-      corresponding dataset.
-    - Each data set should be accompanied by a JSON-like file descriptor
+Implementation:
+- Provide metadata describing the benchmark and the structure of the
+  corresponding dataset.
+- Each data set should be accompanied by a JSON-like file descriptor
 
 ### Metadata Example
 
@@ -111,20 +109,20 @@ example of descriptor is the following:
 }
 ```
 
-- The descriptor starts with the name of the AI asset (```<alg_name>```) and the
-  HW resource (```<HW_name>```) where it was executed. 
-- The asset is run on the HW device with varying configurations of
-  hyperparameters 
-- The first section reports the input expected by the AI asset (```“input”```). 
-    - The input is extremely dependent on the asset (e.g., images, text, tabular
-      data, vectors of real numbers, etc).
-- The metadata descriptor then list all hyperparameters that can be used to
-  configure the AI asset (```hyperparams```)
-    - Hyperparameters have an identifier and they are characterized by details
-      such as the type (string, integer, float, etc) and the lower and upper
-bounds (```“LB”/“UB”```), with the latter two being optional. 
-- The descriptor then reports the list of the metrics measured during the
-  execution of the AI asset, structured similarly to the hyperparameters list
+The descriptor starts with the name of the AI asset (```<alg_name>```) and the
+HW resource (```<HW_name>```) where it was executed.  The asset is run on the HW
+device with varying configurations of hyperparameters 
+
+The first section reports the input expected by the AI asset (```“input”```).
+The input is extremely dependent on the asset (e.g., images, text, tabular data,
+vectors of real numbers, etc). The metadata descriptor then list all
+hyperparameters that can be used to configure the AI asset (```hyperparams```)
+Hyperparameters have an identifier and they are characterized by details such as
+the type (string, integer, float, etc) and the lower and upper bounds
+(```“LB”/“UB”```), with the latter two being optional.  
+
+The descriptor then reports the list of the metrics measured during the
+execution of the AI asset, structured similarly to the hyperparameters list
 (```metrics```).
 
 

@@ -27,15 +27,15 @@ competitiveness in edge computing.
 
 ### Features
 
-- Model Evaluation: Allows thorough assessment of AI models across key metrics,
-  including latency, accuracy, and resource consumption.
-    - Edge-Specific Performance Metrics: Benchmarks models based on edge
-      deployment needs, including processing speed, energy efficiency, and
-memory usage, making it ideal for applications in fields like healthcare and
-robotics.
-    - Deployment Scenarios: Offers pre-configured benchmarking environments that
-      replicate typical edge computing setups, giving accurate insights into
-real-world model performance.
+The model evaluation Allows thorough assessment of AI models across key metrics,
+including latency, accuracy, and resource consumption.  The focus is on
+edge-specific performance metrics, that is benchmarks models based on edge
+deployment needs, including processing speed, energy efficiency, and memory
+usage, making it ideal for applications in fields like healthcare and robotics.
+
+In terms of deployment scenarios, BonsAPPs offers pre-configured benchmarking
+environments that replicate typical edge computing setups, giving accurate
+insights into real-world model performance.
 
 ### Supported Metrics
 
@@ -46,14 +46,14 @@ real-world model performance.
 
 ### User Workflow
 
-- Upload Model: Users can upload models directly to the BonsAPPs platform or
+1. Upload Model: Users can upload models directly to the BonsAPPs platform or
   select one from the Bonseyes AI Marketplace.
-- Select Benchmark Parameters: Configure benchmarks based on desired edge
+2. Select Benchmark Parameters: Configure benchmarks based on desired edge
   application requirements, such as latency thresholds, target devices, or
 performance metrics.
-- Run Benchmark: Initiates the benchmarking process, utilizing the BonsAPPs
+3. Run Benchmark: Initiates the benchmarking process, utilizing the BonsAPPs
   infrastructure to perform tests under pre-set configurations.
-- Review Results: Provides a comprehensive report on model performance,
+4. Review Results: Provides a comprehensive report on model performance,
   highlighting strengths and areas for improvement in the context of edge
 computing needs.
 

@@ -14,11 +14,10 @@ algorithm itself).
 
 ## Importance of Benchmarking
 
-- ***Performance Indicators***: Benchmarks provide crucial insights into how
-  well an algorithm performs on specific systems.
-- ***System Variability***: AI algorithms deployed on different systems exhibit
-  varied performance, making it essential to test across multiple heterogeneous
-platforms.
+Benchmarks provide crucial insights into how well an algorithm performs on
+specific systems.  This is especially true given current system variability, as
+AI algorithms deployed on different systems exhibit varied performance, making
+it essential to test across multiple heterogeneous platforms.
 
 ## Challenges in AI Adoption
 

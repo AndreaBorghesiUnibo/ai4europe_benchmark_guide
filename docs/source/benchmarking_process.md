@@ -1,4 +1,4 @@
-# Benchmarking 
+# Benchmarking Basics
 
 We define a ***benchmark*** as _the execution of an algorithm using a specific
 hardware platform and under a precise configuration of hyperparameters_ (and fed
@@ -19,6 +19,10 @@ case, the set of hyperparameters range from the DNN topology (e.g., overall
 structure of the neural network number of layers, number of nodes per layer) to
 the parameters governing the DNN’s training (from the learning rate to the batch
 size).
+In any way, the first step is to clearly define the benchmarking goals,
+explicitly specifying the task (e.g., in case of LLMs, summarization,
+classification, QA, etc.). It must also be placed care in ensuring consistency
+in task formulation (e.g., input-output format).
 
 To ensure reproducible benchmarks through a systematic approach, a series of
 preliminary questions to guide the benchmarking process need to be addressed.
@@ -38,7 +42,6 @@ benchmark.
 - Does the input [data](bench_data) feed to the AI asset impact the metrics we
   are interested in?  Some metrics might be impacted while others might be
 agnostic to the input.
-
 
 (bench_workflow)=
 ## Workflow
@@ -74,6 +77,12 @@ for embedded systems, or calculating HPC costs based on CPU usage and duration).
 
 (bench_hp)=
 ### Hyperparameters
+
+**Parameters** define the model’s capacity, while **hyperparameters** govern how
+that capacity is utilized. Effective benchmarking requires careful control of
+hyperparameters and transparency about parameters.  Use task-specific insights
+to guide model selection, balancing performance, and resource efficiency.
+
 According to the AI asset, a selection of the hyperparameters of interest must
 be made.
 - This can be done only by someone with sufficient knowledge about the AI asset
@@ -99,6 +108,82 @@ genetic algorithms
 ([GA](https://www.sciencedirect.com/science/article/pii/S1674862X19300047)),
 etc.
 
+#### Parameters vs. Hyperparameters in Large Language Models (LLMs)
+In the context of Large Language Models (LLMs), the distinction between
+parameters and hyperparameters becomes even more critical due to the complexity
+and scale of these models. Understanding these concepts is essential when
+benchmarking LLMs for specific tasks to ensure reproducibility, fairness, and
+insightful comparisons.
+
+1. Parameters in LLMs
+Parameters are the internal variables learned by the model during training. They
+encode the knowledge extracted from the training data and directly affect the
+model's ability to make predictions.
+
+- Weights of Attention Layers:
+    - Attention heads use learned weights to compute key, query, and value
+      vectors
+- Weights in Feed-Forward Layers:
+    - Dense layers that transform intermediate representations
+- Embeddings:
+    - Learned representations of input tokens and positional encodings
+
+Key Characteristics are:
+
+- Scale: LLMs often have billions (or even trillions) of parameters, e.g., GPT-3
+  has 175 billion parameters
+- Fixed After Training: Parameters are determined during pretraining and remain
+  constant during inference
+- Task Adaptation: Fine-tuning or instruction-tuning may adjust parameters for
+  specific tasks
+- Impact on Performance: Larger models (with more parameters) generally have
+  greater capacity but also higher computational costs
+
+Benchmarking Implications:
+
+- Larger parameter counts do not always guarantee better performance on a
+  specific task
+- When benchmarking, evaluate whether the additional capacity is necessary for
+  the task at hand (e.g., small models may suffice for simpler tasks)
+
+2. Hyperparameters in LLMs
+Hyperparameters are external settings that define how the model is trained or
+fine-tuned and influence performance, efficiency, and resource consumption.
+
+Types of Hyperparameters in LLM Context:
+- Training Hyperparameters:
+    - Learning Rate: Determines how quickly model weights are updated during
+      training
+    - Batch Size: Number of training examples processed in a single
+      forward/backward pass
+    - Optimizer Settings: Choices like AdamW vs. SGD, weight decay, and
+      momentum
+
+- Architecture Hyperparameters:
+    - Number of Layers: Depth of the model
+    - Hidden Size: Dimensionality of intermediate representations
+    - Number of Attention Heads: Affects how attention is distributed in
+      multi-head attention
+
+- Inference Hyperparameters:
+    - Temperature: Controls randomness in output text (higher = more diverse)
+    - Top-k / Top-p Sampling: Restricts token sampling to the top-k probable or
+      top-p cumulative probability tokens
+    - Max Tokens: Sets the maximum length of the generated output
+
+Key Characteristics:
+- Hyperparameters are not learned during training and must be specified manually
+  or through optimization methods
+- Different hyperparameters are relevant for training, fine-tuning, and
+  inference
+
+Benchmarking Implications:
+- Selecting optimal hyperparameters for fine-tuning or inference is critical for
+  fair comparisons
+- Default hyperparameters may not be suitable for all tasks—evaluate their
+  impact empirically
+
+
 (bench_data)=
 ### Datasets
 If the AI asset requires data to be executed, it must be provided (for instance,
@@ -106,24 +191,32 @@ training samples for training Machine Learning models or input instances to
 solve optimization problems).  Select or create appropriate datasets that
 reflect the real-world scenarios and challenges relevant to your AI system or
 task
-- It's crucial to ensure the datasets are diverse, representative, and cover a
-  wide range of possible inputs to obtain reliable benchmarking results.
-- The data must be detailed described using meta-data. To ensure full
-  reproducibility it is better to follow a precise
-[checklist](./reproducibility_checklist.md).
-- Check as well whether the available data is annotated (and whether the
-  annotation process is well-documented, e.g., to better identify possible
-sources of bias).A
-- Consider the amount of data required to obtain trustworthy benchmarking
-  results
+
+It's crucial to ensure the datasets are diverse, representative, and cover a
+wide range of possible inputs to obtain reliable benchmarking results. The data
+must be detailed described using meta-data. To ensure full reproducibility it is
+better to follow a precise [checklist](./reproducibility.md).
+
+It is as important to check whether the available data is annotated (and whether
+the annotation process is well-documented, e.g., to better identify possible
+sources of bias).  To obtain trustworthy benchmarking results it is crucial to :
+1) consider the amount of data required and 2) use the same dataset and
+pre-processing steps across models.
 
 (bench_metrics)=
 ### Metrics
 As a final choice, the metrics to be measured must be decided, again according
 to what can be relevant to the AI asset in question
-- The choice of the metrics depends as well on the HW platform selected, as a
-  metric that can be measured on an embedded device could be much harder
-- See [Metrics](./metrics.md) for more details 
+The choice of the metrics depends as well on the HW platform selected, as a
+metric that can be measured on an embedded device could be much harder.
+
+The metrics can be grouped in four (very broad classes):
+1. Accuracy -- Task-specific performance metrics
+2. Efficiency -- Latency, memory usage, and computational cost
+3. Robustness -- Performance on adversarial or noisy inputs
+4. Generalization -- Performance across different datasets for the same task
+
+See [Metrics](./metrics.md) for more details 
 
 (bench_out)=
 ### Benchmark Output
@@ -146,6 +239,13 @@ first choice to be made is how to organise the results:
       interfering with already existing ones
     - CONS: Slightly more complicated management; e.g., different data sets must
       share the same structure (format) to guarantee compatibility 
-- See [Output](./output.md) for more details 
+
+See [Output](./output.md) for more details.
+In any case, report findings transparently clearly documenting: 1) model
+parameters and architecture; 2) training and inference hyperparameters; 3)
+dataset details (size, splits, preprocessing); 4) 4omputational resources used
+(e.g., GPU/TPU type, runtime)
+
+
 
 
